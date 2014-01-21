@@ -1,13 +1,13 @@
 {
-	"modListVersion": 2,
-	"modList": [
+	"modinfoversion": 2,
+	"modlist": [
 		{
 			"modid": "Stackie",
 			"name": "Stackie",
 			"description": "Stack entities into groups to decrease lag.",
 			"mcversion": "${mcversion}",
 			"version": "${version}",
-			"authorList": [
+			"authors": [
 				"Lunatrius"
 			],
 			"credits": "",
@@ -19,7 +19,7 @@
 			"screenshots": [  ],
 			"updateUrl": "http://mc.lunatri.us/",
 			"url": "http://mc.lunatri.us/",
-			"useDependencyInformation": true
+			"useDependencyInformation": "true"
 		}
 	]
 }
