@@ -22,10 +22,11 @@ configFile.withReader {
 }
 
 ext.build = System.getenv().BUILD_NUMBER ?: "dev"
+ext.modversion = "${config.version.major}.${config.version.minor}.${config.version.micro}.${build}"
 
-group = "com.github.lunatrius.${config.mod.package}"
-version = "${config.version.major}.${config.version.minor}.${config.version.micro}.${build}"
-archivesBaseName = "[${config.version.minecraft}]${config.mod.id}"
+group = "com.github.lunatrius"
+version = version = "${config.version.minecraft}-${modversion}"
+archivesBaseName = config.mod.id
 
 minecraft {
     version = "${config.version.minecraft}-${config.version.forge}"
@@ -37,16 +38,20 @@ minecraft {
 }
 
 jar {
-    appendix = "universal"
+    classifier = "universal"
 }
 
 processResources {
+    // this will ensure that this task is redone when the versions change.
+    inputs.property "version", project.version
+    inputs.property "mcversion", project.minecraft.version
+
     from (sourceSets.main.resources.srcDirs) {
         include "mcmod.info"
         include "version.properties"
 
         expand (["modid": config.mod.id,
-            "version": version,
+            "version": modversion,
             "mcversion": config.version.minecraft,
             "forgeversion": config.version.forge
         ])
